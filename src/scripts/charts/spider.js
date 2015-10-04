@@ -196,6 +196,9 @@
       // index, value and meta data
       var path = smoothing(pathCoordinates, pathData);
 
+      //Close path
+      path.close = true;
+
       // If we should show points we need to create them now to avoid secondary loop
       // Points are drawn from the pathElements returned by the interpolation function
       // Small offset for Firefox to render squares correctly
