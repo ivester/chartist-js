@@ -144,8 +144,9 @@
       axisY = options.axisY.type.call(Chartist, Chartist.Axis.units.y, data, chartRect, options.axisY);
     }
 
-    axisX.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
-    axisY.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
+    //axisX.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
+    axisX.createGridAndLabelsSpider(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
+    //axisY.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
 
     // Draw the series
     data.raw.series.forEach(function(series, seriesIndex) {

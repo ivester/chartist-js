@@ -804,6 +804,55 @@ var Chartist = {
   };
 
   /**
+   * Creates a spider grid line based on a projected value.
+   *
+   * @memberof Chartist.Core
+   * @param positions
+   * @param index
+   * @param axis
+   * @param offset
+   * @param length
+   * @param group
+   * @param classes
+   * @param eventEmitter
+   */
+  Chartist.createGridSpider = function(positions, index, axis, offset, length, group, classes, eventEmitter) {
+    var positionalData = {};
+
+    var maxLengthHorizontally = (axis.chartRect.x2 - axis.chartRect.x1) / 2;
+    var maxLengthVertically = (axis.chartRect.y1 - axis.chartRect.y2) / 2;
+
+    var maxLength = maxLengthHorizontally > maxLengthVertically ? maxLengthVertically : maxLengthHorizontally;
+
+    var horizontalCenter =  axis.chartRect.x1 + maxLengthHorizontally;
+    var verticalCenter = axis.chartRect.y2 + maxLengthVertically;
+
+    var angle = 360 / axis.ticks.length * index;
+    var position2 = {};
+
+    position2.x = horizontalCenter + (maxLength * Math.cos(angle * (Math.PI / 180)));
+    position2.y = verticalCenter - (maxLength * Math.sin(angle * (Math.PI / 180)));
+
+    positionalData[axis.units.pos + '1'] = horizontalCenter;
+    positionalData[axis.units.pos + '2'] = position2.x;
+    positionalData[axis.counterUnits.pos + '1'] = verticalCenter;
+    positionalData[axis.counterUnits.pos + '2'] = position2.y;
+
+    var gridElement = group.elem('line', positionalData, classes.join(' '));
+
+    // Event for grid draw
+    eventEmitter.emit('draw',
+      Chartist.extend({
+        type: 'grid',
+        axis: axis,
+        index: index,
+        group: group,
+        element: gridElement
+      }, positionalData)
+    );
+  };
+
+  /**
    * Creates a label based on a projected value and an axis.
    *
    * @memberof Chartist.Core
