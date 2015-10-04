@@ -127,7 +127,7 @@
     var axisX, axisY;
 
     if(options.axisX.type === undefined) {
-      axisX = new Chartist.StepAxis(Chartist.Axis.units.x, data, chartRect, Chartist.extend({}, options.axisX, {
+      axisX = new Chartist.SpiderAxis(Chartist.Axis.units.x, data, chartRect, Chartist.extend({}, options.axisX, {
         ticks: data.raw.labels,
         stretch: options.fullWidth
       }));
@@ -147,6 +147,7 @@
     //axisX.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
     axisX.createGridAndLabelsSpider(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
     //axisY.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
+    //TODO Create spider y-axis
 
     // Draw the series
     data.raw.series.forEach(function(series, seriesIndex) {
@@ -168,10 +169,11 @@
         pathData = [];
 
       data.normalized[seriesIndex].forEach(function(value, valueIndex) {
-        var p = {
-          x: chartRect.x1 + axisX.projectValue(value, valueIndex, data.normalized[seriesIndex]),
-          y: chartRect.y1 - axisY.projectValue(value, valueIndex, data.normalized[seriesIndex])
-        };
+        //var p = {
+        //  x: chartRect.x1 + axisX.projectValue(value, valueIndex, data.normalized[seriesIndex]),
+        //  y: chartRect.y1 - axisY.projectValue(value, valueIndex, data.normalized[seriesIndex])
+        //};
+        var p =  axisX.projectValue(value, valueIndex, data.normalized[seriesIndex]);
         pathCoordinates.push(p.x, p.y);
         pathData.push({
           value: value,
