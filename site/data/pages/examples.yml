@@ -256,3 +256,10 @@ sections:
           intro: >
                     Although it'd be also possible to achieve this animation with CSS, with some minor suboptimal
                     things, here's an example of how to animate donut charts using Chartist.Svg.animate and SMIL.
+      - type: live-example
+        data:
+          title: Spider Chart
+          level: 4
+          id: example-spider-chart
+          classes: ct-golden-section
+          intro: Spider Chart
